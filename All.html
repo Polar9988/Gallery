@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/All.css">
+    <!-- <style>
+        a {
+            text-decoration: none;
+        }
+
+        a:link {
+            color: red;
+        }
+
+        a:hover {
+            background-color: cadetblue;
+        }
+
+        /* 通用選擇器  大家都接受這個*/
+        * {
+            /* 自動計算面積效應 */
+            box-sizing: border-box;
+
+        }
+
+        /* body 標籤選擇器 */
+        body {
+            background-color: lightblue;
+            margin: 0;
+            height: 100vh;
+            width: 100%;
+        }
+
+        /* 類別(class)選擇器 */
+        .nav {
+            background-color: lightgray;
+            width: 366px;
+            height: 100%;
+            float: left;
+            padding: 70px 80px;
+            font-family: Courier;
+            font-weight: bolder;
+        }
+
+        .logo {
+            width: 150px;
+            height: 150px;
+            background-color: aqua;
+            margin: auto;
+            margin-bottom: 50px;
+            background-image: url(./img/芙莉蓮大頭貼.jpg);
+            background-size: cover;
+            border-radius: 50%;
+        }
+
+        .logo:hover {
+            transform: rotate(-15deg) scale(1.2);
+            transition: 1.5s;
+        }
+
+        .nav-btn-all {
+            /* background-color: blueviolet; */
+            width: 100%;
+        }
+
+        .nav-btn {
+            width: 100%;
+            background-color: pink;
+            height: 50px;
+            display: inline-block;
+            margin-bottom: 10px;
+            text-align: center;
+            color: red;
+            font-size: 24px;
+            line-height: 50px;
+        }
+
+        .nav-btn:hover {
+            background-color: red;
+            color: yellow;
+        }
+
+        .nav-btn:active {
+            background-color: blue;
+            color: white;
+        }
+
+        .container {
+            width: calc(100% - 366px);
+            height: 100%;
+            /* background-color: brown; */
+            float: left;
+            padding-top: calc((100vh - 570px)/2);
+
+        }
+
+        .content {
+            /* background-color: aqua; */
+            width: 960px;
+            height: 570px;
+            margin: auto;
+
+        }
+
+        .img {
+            background-color: blue;
+            width: calc((100% - 10px * 2)/3);
+            height: 100%;
+            float: left;
+            margin-right: 10px;
+            background-size: cover;
+        }
+
+        .img:hover {
+            /* 遍大小 */
+            transform: scale(1.02);
+            /* 選轉角度 */
+            transform: rotate(30deg);
+            /* 變圓 */
+            border-radius: 30px;
+            transform: rotateY(180deg);
+            /* 動作變慢 */
+            transition: 2s;
+        }
+
+        .img-1 {
+            background-image: url(./img/Flamme-1.jpg);
+            background-position: 46%;
+        }
+
+        .img-2 {
+            background-image: url(./img/Sousou\ no\ Frieren.jpg);
+            background-position: 36%;
+
+        }
+
+        .img-3 {
+            margin-right: 0;
+            background-image: url(./img/KkUMoTR.jpg);
+            background-size: cover;
+            background-position: 40%;
+        }
+
+        .img-1:hover {
+            background-image: url(./img/Flamme\ _\ Sousou\ No\ Frieren\ _Ep25.jpg);
+        }
+
+        .img-2:hover {
+            background-image: url(./img/弗蘭梅芙莉蓮花海.jpg);
+
+        }
+
+        .img-3:hover {
+            background-image: url(./img/芙莉蓮花海.jpg);
+        }
+
+        .logo-1:hover {
+            background-image: url(./img/芙莉蓮爆炸頭.jpg);
+        }
+        /* 漢堡條 */
+        .ham-btn {
+            background-color: aqua;
+            width: 100px;
+            height: 80px;
+            /* label 本來是行內元素，需要顯示模式設為區塊或行內區域 */
+            display: none;
+            position: relative;
+        }
+
+        /* 空格代表後代 */
+        .ham-btn .line {
+            background-color: black;
+            width: 80%;
+            height: 10px;
+            position: absolute;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            transition: 1s
+        }
+
+        .ham-btn .line-1 {
+            top: 25%;
+        }
+
+        .ham-btn .line-2 {
+            top: 50%;
+        }
+
+        .ham-btn .line-3 {
+            top: 75%;
+        }
+
+        /* 測試能不能work */
+        /* #ham-btn-switch:checked{
+            width: 100px;
+            height: 100px;
+        } */
+        /*:checked 按鈕按下， +  =>後面第一個兄弟 */
+        #ham-btn-switch:checked+.ham-btn .line-2 {
+            top: 50%;
+            transform: translate(-50%, -50%) rotate(-45deg);
+        }
+
+        #ham-btn-switch:checked+.ham-btn .line-1 {
+            top: 50%;
+            transform: translate(-50%, -50%) rotate(45deg);
+        }
+
+        #ham-btn-switch:checked+.ham-btn .line-3 {
+            top: 50%;
+            transform: translate(-50%, -50%) rotate(-45deg);
+        }
+    </style> -->
+</head>
+
+<body>
+    <!-- 1.左 nav
+            a.logo
+            b.按鈕區
+        2.右 內容區
+            a.有一塊圖片區
+            b.有三張圖片 -->
+    <div class="nav">
+        <!-- 漢堡條按鈕 -->
+        <input type="checkbox" id="ham-btn-switch" hidden>
+        <label for="ham-btn-switch" class="ham-btn">
+            <div class="line line-1"></div>
+            <div class="line line-2"></div>
+            <div class="line line-3"></div>
+        </label>
+        <div class="logo logo-1"></div>
+        <div class="nav-btn-all">
+            <a href="https://youtu.be/1H2cyhWYXrE?si=GQYU0R-Jjvm6Asxj" target="_blank" class="nav-btn">YOUTUBE</a>
+            <a href="https://x.com/FRIEREN_PR" target="_blank" class="nav-btn">TWITTER</a>
+            <a href="https://activity.books.com.tw/crosscat/show/A00000031267" target="_blank" class="nav-btn">BOOKS</a>
+        </div>
+    </div>
+    <div class="container">
+        <div class="content">
+            <div class="img img-1"></div>
+            <div class="img img-2"></div>
+            <div class="img img-3"></div>
+        </div>
+    </div>
+</body>
+
+</html>
