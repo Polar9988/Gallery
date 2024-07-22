@@ -1,0 +1,417 @@
+
+a {
+    text-decoration: none;
+}
+
+a:link {
+    color: red;
+}
+
+a:hover {
+    background-color: cadetblue;
+}
+
+/* 通用選擇器  大家都接受這個*/
+* {
+    /* 自動計算面積效應 */
+    box-sizing: border-box;
+
+}
+
+/* body 標籤選擇器 */
+body {
+    background-color: lightblue;
+    margin: 0;
+    height: 100vh;
+    width: 100%;
+}
+
+/* 類別(class)選擇器 */
+.nav {
+    background-color: lightgray;
+    width: 366px;
+    height: 100%;
+    float: left;
+    padding: 70px 80px;
+    font-family: Courier;
+    font-weight: bolder;
+}
+@media(max-width:1350px){
+    .nav {
+        width: 300px;
+        padding: 60px 80px;
+    }
+}
+@media(max-width:1130px){
+    .nav {
+        width: 100%;
+        height: 120px;
+        float: right;
+        padding: 20px 10px;
+        
+    }
+}
+@media(max-width:590px){
+    .nav {
+        height: 80px;
+        position: relative;
+    }
+}
+
+.logo {
+    width: 150px;
+    height: 150px;
+    background-color: aqua;
+    margin: auto;
+    margin-bottom: 50px;
+    background-image: url(../img/芙莉蓮大頭貼.jpg);
+    background-size: cover;
+    border-radius: 50%;
+}
+@media(max-width:1130px){
+    .logo {
+        width: 80px;
+        height: 80px;
+        /* margin: auto; */
+        /* margin-bottom: 50px; */
+        float: left;
+    }
+}
+@media(max-width:590px){
+    .logo {
+        width: 50px;
+        height: 50px;
+        /* margin: auto; */
+        /* margin-bottom: 50px; */
+        float: none;
+        position: absolute;
+        left: calc(50% - 25px);
+        top: calc(50% - 25px);
+    }
+}
+
+.logo:hover {
+    transform: rotate(-15deg) scale(1.2);
+    transition: 1.5s;
+}
+
+@media(max-width:1130px){
+    .nav-btn-all {
+        float: right;
+    }
+}
+@media(max-width:590px){
+    .nav-btn-all {
+        float: none;
+        display: none;
+        /* background-color: brown; */
+        position: absolute;
+        left: 0;
+        top: 60px;
+        width: 100%;
+    }
+}
+.nav-btn {
+    width: 100%;
+    background-color: pink;
+    height: 50px;
+    display: inline-block;
+    margin-bottom: 10px;
+    text-align: center;
+    color: red;
+    font-size: 24px;
+    line-height: 50px;
+}
+@media(max-width:1130px){
+    .nav-btn {
+        width: 120px;
+        /* height: 35px; */
+        /* display: inline-block; */
+        margin-right: 20px;
+        margin-bottom: -30px;
+        margin-top: 20px;
+        /* text-align: center; */
+        color: red;
+        /* line-height: 5px; */
+        padding: 0;
+    }
+}
+@media(max-width:590px){
+    .nav-btn {
+        width: 100%;
+        height: 50px;
+        /* display: inline-block; */
+
+        font-size: 24px;
+        /* line-height: 50px; */
+        float: left;
+    }
+}
+.nav-btn:hover {
+    background-color: red;
+    color: yellow;
+}
+
+.nav-btn:active {
+    background-color: blue;
+    color: white;
+}
+
+.container {
+    width: calc(100% - 366px);
+    height: 100%;
+    /* background-color: brown; */
+    float: left;
+    padding-top: calc((100vh - 570px)/2);
+
+}
+@media (max-width:1350px){
+    .container {
+        width: calc(100% - 300px);
+    }
+}
+@media(max-width:1130px){
+    .container {
+        height: calc(100% - 120px);
+        padding: 50px 60px 50px 60px;
+        clear: right;
+        width: 100%;
+    }
+}
+@media(max-width:590px){
+    .container {
+        height: calc(100% - 80px);
+        width: 100vw;
+        float: left;
+        padding: 0;
+    }
+}
+
+.content {
+    /* background-color: aqua; */
+    width: 960px;
+    height: 570px;
+    margin: auto;
+    
+}
+@media (max-width:1350px){
+    .content {
+        width: 800px;   
+    }
+}
+@media(max-width:1130px){
+    .content {
+        width: 80vw;
+        margin: auto;
+        height: 100%;
+    }
+}
+@media(max-width:590px){
+    .content {
+        width: 100%;
+        height: 100%;
+        margin: auto;
+    }
+}
+.img {
+    background-color: blue;
+    width: calc((100% - 10px * 2)/3);
+    height: 100%;
+    float: left;
+    margin-right: 10px;
+    background-size: cover;
+}
+@media(max-width:1130px){
+    .img {
+        margin-right: none;
+    }
+}
+
+.img:hover {
+    border-radius: 30px;
+    transform: rotateY(180deg);
+    transition: 2s;
+}
+
+.img-1 {
+    background-image: url(../img/Flamme-1.jpg);
+    background-position: 46%;
+}
+@media (max-width:1350px){
+    .img-1 {
+        background-position: 90% 66%;
+        width: 100%;
+        height: calc((100% - 10px)/2);
+        margin-bottom: 10px;
+    }
+}
+@media(max-width:590px){
+    .img-1 {
+        background-position: 60% 66%;
+        width: 100%;
+        height: 33%;
+        margin-bottom: 0;
+    }
+}
+.img-2 {
+    background-image: url(../img/Sousou\ no\ Frieren.jpg);
+    background-position: 36%;
+
+}
+@media (max-width:1350px){
+    .img-2 {
+        width: calc((100% - 10px)/2);
+        height: calc((100% - 10px)/2);
+        margin-right: 10px;
+    }
+}
+@media(max-width:1130px){
+    .img-2 {
+        background-position: 86% 50%;    
+    }
+}
+@media(max-width:590px){
+    .img-2 {
+        background-position: 0% 40%;
+        width: 100%;
+        height: 34%;
+    }
+}
+.img-3 {
+    margin-right: 0;
+    background-image: url(../img/KkUMoTR.jpg);
+    background-size: cover;
+    background-position: 40%;
+}
+@media (max-width:1350px){
+    .img-3 {
+        width: calc((100% - 10px)/2);
+        height: calc((100% - 10px)/2);
+    }
+}
+@media(max-width:1130px){
+    .img-3 {
+        background-position: 50% 0%;
+    }
+}
+@media(max-width:590px){
+    .img-3 {
+        background-position: 40%;
+        width: 100%;
+        height: 33%;
+    }
+}
+.img-1:hover {
+    background-image: url(../img/Flamme\ _\ Sousou\ No\ Frieren\ _Ep25.jpg);
+}
+@media (max-width:1350px){
+    .img-1:hover {
+        background-position: 0 37%;
+    }
+}
+
+.img-2:hover {
+    background-image: url(../img/弗蘭梅芙莉蓮花海.jpg);
+}
+@media (max-width:1350px){
+    .img-2:hover {
+        background-position: 36%;
+    }
+}
+
+.img-3:hover {
+    background-image: url(../img/芙莉蓮花海.jpg);
+}
+@media (max-width:1350px){
+    .img-3:hover {
+        background-position: 0 72%;
+    }
+}
+@media(max-width:1130px){
+    .img-3:hover {
+        background-position: 80% 80%;
+    }
+}
+@media(max-width:590px){
+    .img-3:hover {
+        background-position: 0 70%;
+        background-size: cover;
+    }
+}
+.logo-1:hover {
+    background-image: url(../img/芙莉蓮爆炸頭.jpg);
+}
+/* 漢堡條 */
+.ham-btn {
+    background-color: aqua;
+    width: 100px;
+    height: 80px;
+    /* label 本來是行內元素，需要顯示模式設為區塊或行內區域 */
+    display: none;
+    position: relative;
+}
+@media(max-width:590px){
+    .ham-btn {
+        background-color: lightblue;
+        width: 60px;
+        height: 60px;
+        /* label 本來是行內元素，需要顯示模式設為區塊或行內區域 */
+        display: block;
+        position: relative;
+        z-index: 5;
+        position: absolute;
+        left: 10px;
+        top: 10px;
+    }
+}
+/* 空格代表後代 */
+.ham-btn .line {
+    background-color: black;
+    width: 80%;
+    height: 10px;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: 1s;
+    z-index: 5;
+}
+@media(max-width:590px){
+    .ham-btn .line {
+        background-color:darkcyan;
+    }
+}
+.ham-btn .line-1 {
+    top: 25%;
+}
+
+.ham-btn .line-2 {
+    top: 50%;
+}
+
+.ham-btn .line-3 {
+    top: 75%;
+}
+
+/* 測試能不能work */
+/* #ham-btn-switch:checked{
+    width: 100px;
+    height: 100px;
+} */
+/*:checked 按鈕按下， +  =>後面第一個兄弟 */
+#ham-btn-switch:checked+.ham-btn .line-2 {
+    top: 50%;
+    transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+#ham-btn-switch:checked+.ham-btn .line-1 {
+    top: 50%;
+    transform: translate(-50%, -50%) rotate(45deg);
+}
+
+#ham-btn-switch:checked+.ham-btn .line-3 {
+    top: 50%;
+    transform: translate(-50%, -50%) rotate(-45deg);
+}
+#ham-btn-switch:checked~.nav-btn-all{
+    display: flex;
+}
