@@ -1,0 +1,234 @@
+// 動畫
+@keyframes redeye {
+    0%{
+        background-size: 280%;
+        box-shadow: 0 0 150px 15px tomato;
+    }
+    60%{
+        background-size: 160%;
+        box-shadow: 0 0 350px 15px rgba(255,208,116,1);
+    }
+    90%{
+        background-size: 150%;
+    }
+}
+@keyframes loading {
+    0%{
+        width: 142px;
+    }
+    
+    100%{
+        width: 176px;
+    }
+    
+}
+@keyframes fusion {
+
+    0%,
+    10% {
+        
+        width: 50px;
+        height: 50px;
+        transform: rotate(0deg) translateX(120px);
+    }
+
+    40%,
+    70% {
+        
+        width: 70px;
+        height: 70px;
+        transform: rotate(calc(360deg/8*var(--i)));
+        // box-shadow: 0 0 0 10px #fff;
+        box-shadow: 0 0 350px 15px rgba(255,208,116,1);
+    }
+
+    90%,
+    100% {
+        
+        width: 75px;
+        height: 75px;
+        transform: rotate(0deg) translateX(120px);
+    }
+}
+@keyframes magicball{
+    0%,
+    10% {
+        width: 70px;
+        height: 70px;
+        // transform: rotate(0deg) translateX(120px);
+    }
+
+    40%,
+    70% {
+        width: 50px;
+        height: 50px;
+        // transform: rotate(calc(360deg/8*var(--i)));
+        // box-shadow: 0 0 0 10px #fff;
+        box-shadow: 0 0 400px 15px rgba(255,208,116,1);
+    }
+
+    90%,
+    100% {
+        width: 90px;
+        height: 90px;
+        // transform: rotate(0deg) translateX(120px);
+    }
+}
+
+
+// 靜態
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    width: 100%;
+    // height: 100vh;
+    background-color: rgb(0, 0, 0);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    width: 698px;
+    height: 736px;
+    // background: linear-gradient(45deg, #006bc6, #1ecafc);
+    background-image: url(../img/F-手中施法.jpg);
+    // display: flex;
+    // justify-content: center;
+    // align-items: center;
+    border-radius: 50%;
+    box-shadow: 10px black;
+    transition:all 1.0s ease-in-out;
+    background-repeat: no-repeat;
+    background-size: cover;
+    
+    
+
+
+
+    .content {
+        top: 295px;
+        left: 0;
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        
+
+        // .box {
+
+        //     width: 100px;
+        //     height: 100px;
+        //     // background-color: #fff;
+        //     background: radial-gradient(circle, rgba(204, 236, 204, 1) 0%, rgba(85, 255, 0, 1) 100%);
+        //     border-radius: 50%;
+        // }
+
+        
+
+        .magic {
+            position: relative;
+            width: 300px;
+            height: 300px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            // background-color: rgba(0, 0, 0, 0.25);
+
+            .ball {
+                position: absolute;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                width: 80px;
+                height: 80px;
+                border-radius: 50%;
+                background:radial-gradient(circle, rgba(255,208,116,1) 30%, rgba(252,255,143,1),transparent);
+                box-shadow: 0 0 600px 150px rgba(252,255,143,1);
+                animation: magicball 5s ease-in-out infinite;
+                animation-direction: alternate;
+                
+
+            }
+
+
+            .dot-1 {
+                position: absolute;
+                left: 0;
+                width: 0px;
+                height: 0px;
+                // background-color: #fff;
+                background:  radial-gradient(circle, rgba(255,208,116,1) 30%, transparent 75%);
+                border-radius: 50%;
+                animation: fusion 5s ease-in-out infinite;
+                animation-delay: calc(0.15s*var(--i));
+                transform-origin: 150px;
+                
+                
+                
+            }
+
+
+        }
+        h1 {
+            position: absolute;
+            color: red;
+            font-size: 40px;
+            // display: flex;
+            // justify-content: center;
+            // justify-content: center;
+            // align-items: center;
+            animation: loading 1.3s linear 0s infinite;
+            animation-direction: alternate;
+            top: 30px;
+            border-right: 0px solid white;
+            overflow: hidden;
+            
+        }
+        
+    }
+    &:hover{
+        background-image:url(../img/Frieren-mad.jpg);
+        width: 698px;
+        height: 736px;
+        border-radius: 50%;
+        background-size: cover;
+        background-repeat: no-repeat;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-position: 50% 50%;
+        // transition: 1.5s;
+        opacity: 1;
+        // box-shadow: 10px 10px 10px 10px blue;
+        animation: redeye 3s linear 1.5s infinite;
+        .content{
+        top: 350px;
+        left: 0;
+        position: relative;
+        display: flex;
+        justify-content: center;
+        justify-content: center;
+        align-items: center;
+            .magic{
+                display: none;
+            }
+        }
+        h1{
+            color: lightblue;
+        }
+    }
+}
+
+// .background-pic {
+//     width: 698px;
+//     height: 736px;
+//     background-image: url(../img/F-手中施法.jpg);
+//     display: flex;
+//     justify-content: center;
+//     align-items: center;
+// }

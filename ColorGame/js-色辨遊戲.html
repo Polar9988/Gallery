@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>色彩辨識遊戲</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      border-radius: 10px;
+    }
+
+    #container {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      background-color: #F06060;
+    }
+
+    #cube-box {
+      margin-top: 50px;
+      width: 500px;
+      height: 500px;
+      background-color: #ddd;
+      background-image: url(./img/Blue_Period.jpg);
+      padding: 10px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      cursor: pointer;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .color-box {
+      background-color: yellow;
+      cursor: pointer;
+      transition: opacity 0.3s;
+      flex: 0 0 calc(100% / var(--n) - 10px);
+      /* 設置方塊大小 */
+      aspect-ratio: 1;
+      /* 保持正方形 */
+    }
+
+    #score-board {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      padding: 10px;
+      background-color: white;
+      border: 2px solid black;
+      font-size: 1.2rem;
+    }
+
+    #timer {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      padding: 10px;
+      background-color: white;
+      border: 2px solid black;
+      font-size: 1.2rem;
+    }
+
+    .ctrl-button{
+      padding: 10px;
+      position: absolute;
+      top:5px;
+      cursor: pointer;
+    }
+
+    input {
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+  <section id="container">
+    <button type="button" class="ctrl-button" id="start-button">開始遊戲</button>
+    <button type="button" class="ctrl-button" id="pause-button" style="display: none;">暫停遊戲</button>
+    <button type="button" class="ctrl-button" id="resume-button" style="display: none;">繼續遊戲</button>
+    <div class="question">
+      <div id="cube-box"></div>
+    </div>
+    <div id="score-board">分數: 0</div>
+    <div id="timer">剩餘時間: 秒</div>
+    <div>
+      <label for="initial-time">設置遊戲時間（秒）：</label>
+      <input type="number" id="initial-time" value="30" min="30">
+    </div>
+    <div>
+      <input type="checkbox" id="auto-increment" checked>
+      <label for="auto-increment">每答對三題自動增加方塊數量</label>
+    </div>
+
+  </section>
+
+  <script>
+    const cubeBox = document.querySelector('#cube-box');
+    const scoreBoard = document.querySelector('#score-board');
+    const timerDisplay = document.querySelector('#timer');
+    const startButton = document.querySelector('#start-button');
+    const pauseButton = document.querySelector('#pause-button');
+    const resumeButton = document.querySelector('#resume-button');
+    const initialTimeInput = document.querySelector('#initial-time');
+    const autoIncrementCheckbox = document.querySelector('#auto-increment');
+    const question = document.querySelector('.question')
+
+    let score = 0;
+    let questionCount = 0;
+    let correctAnswersCount = 0;
+    let timeLeft = 30;
+    let timerInterval;
+    let baseOpacity = 0.3;
+    let opacityIncrement = 0.015;
+    let n = 2;
+    let gameStarted = false;
+    let gamePaused = true;
+    let currentColorBoxes = [];
+
+    startButton.addEventListener('click', startGame);
+    pauseButton.addEventListener('click', pauseGame);
+    resumeButton.addEventListener('click', resumeGame);
+
+    function startGame() {
+      if (!gameStarted) {
+        gameStarted = true;
+        gamePaused = false;
+        startButton.style.display = 'none';
+        pauseButton.style.display = 'inline-block';
+        pauseButton.style.backgroundColor = 'orangered';
+        pauseButton.style.color = 'white';
+        resumeButton.style.display = 'none';
+        initialTimeInput.disabled = true; // 停用初始時間輸入框
+        autoIncrementCheckbox.disabled = true; // 停用方塊增加checkbox
+        timeLeft = parseInt(initialTimeInput.value); // 從輸入框中讀取初始時間
+        startTimer();
+        cubeBox.style.backgroundImage = 'none';
+        generateColorBoxes();
+        cubeBox.addEventListener('click', handleAnswerClick);
+      }
+    }
+
+    function pauseGame() {
+      if (!gamePaused) {
+        gamePaused = true;      
+        clearInterval(timerInterval);
+        pauseButton.style.display = 'none';
+        resumeButton.style.display = 'inline-block';
+        resumeButton.style.backgroundColor = 'lightgreen'; // 繼續遊戲按鈕顏色
+        cubeBox.removeEventListener('click', handleAnswerClick);
+      }
+    }
+
+    function resumeGame() {
+      if (gamePaused) {
+        gamePaused = false;
+        pauseButton.style.display = 'inline-block';
+        pauseButton.style.backgroundColor = 'orangered'; // 暫停遊戲按鈕顏色
+        resumeButton.style.display = 'none';
+        startTimer();
+        cubeBox.addEventListener('click', handleAnswerClick);
+      }
+    }
+
+    function handleAnswerClick(event) {
+      if (!gamePaused) {
+        const clickedBox = event.target;
+        if (!clickedBox.classList.contains('color-box')) {
+        return;
+        }
+        if (clickedBox.dataset.answer === 'true') {
+          score++;
+          baseOpacity += opacityIncrement;
+          correctAnswersCount++;
+          if (autoIncrementCheckbox.checked && correctAnswersCount === 3) {
+            correctAnswersCount = 0;
+            n++;
+          }
+        }
+        updateScoreBoard();
+        generateColorBoxes();
+      }
+    }
+
+    function generateColorBoxes() {
+      cubeBox.innerHTML = '';
+      cubeBox.style.setProperty('--n', n); // 設置 CSS 變數 --n 的值為當前方塊數量
+      let total = n ** 2; // 先計算起來 之後不用每次用到都算一次
+      const baseColor = getRandomColor();
+      let answerIndex = Math.floor(Math.random() * total);
+
+      for (let i = 0; i < total; i++) {
+        const colorBox = document.createElement('div');
+        colorBox.classList.add('color-box');
+        colorBox.style.backgroundColor = baseColor;
+
+        if (i === answerIndex) {
+          colorBox.style.opacity = baseOpacity; // 設置答案方塊的透明度
+          colorBox.dataset.answer = 'true';
+        }
+
+        cubeBox.appendChild(colorBox);
+      }
+
+      currentColorBoxes = Array.from(cubeBox.children); // 保存當前的題目方塊
+    }
+
+    function getRandomColor() {
+      let x = Math.floor(Math.random() * 200);
+      let y = Math.floor(Math.random() * 200);
+      let z = Math.floor(Math.random() * 200);
+      return `rgb(${x},${y},${z})`;
+    }
+
+    function startTimer() {
+      timerDisplay.style.display = 'block';
+      timerInterval = setInterval(updateTimer, 1000);
+    }
+
+    function updateTimer() {
+      if (!gamePaused) {
+        timeLeft--;
+        timerDisplay.textContent = `剩餘時間：${timeLeft}秒`;
+        if (timeLeft === 0) {
+          endGame();
+        }
+      }
+    }
+
+    function endGame() {
+      clearInterval(timerInterval);
+      alert(`遊戲結束！你的最終得分是 ${score} 分。`);
+      score = 0;
+      questionCount = 0;
+      correctAnswersCount = 0; // 重置答對題數計數
+      timeLeft = 30;
+      baseOpacity = 0.3; // 重置答案方塊的透明度
+      n = 2; // 重置方塊數量
+      updateScoreBoard();
+      timerDisplay.style.display = 'none'; // 隱藏計時器
+      startButton.style.display = 'inline-block';
+      pauseButton.style.display = 'none';
+      resumeButton.style.display = 'none';
+      initialTimeInput.disabled = false; // 啟用初始時間輸入框
+      autoIncrementCheckbox.disabled = false;// 啟用方塊增加checkbox
+      gameStarted = false;
+      gamePaused = true;
+       // 重置保存的題目方塊
+      cubeBox.innerHTML = '';
+      cubeBox.style.backgroundImage = 'url(./img/Blue_Period.jpg)';
+    }
+
+    function updateScoreBoard() {
+      scoreBoard.textContent = `分數: ${score}`;
+    }
+
+  </script>
+</body>
+
+</html>

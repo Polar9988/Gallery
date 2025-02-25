@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>天氣小卡</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="./天氣小卡.css">
+    <link href="https://fonts.googleapis.com/css2?family=LXGW+WenKai+TC&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="big-container">
+        <header>
+            <nav id="navbar">
+                <ul>
+                    <!-- <li><a href="#">Home</a></li> -->
+                    <li>全部地區</li>
+                    <li>北部地區</li>
+                    <li>中部地區</li>
+                    <li>南部地區</li>
+                    <li>東部地區</li>
+                    <li>離島地區</li>
+                </ul>
+            </nav>
+        </header>
+
+        <section>
+            <div id="wrapper">
+                <div id="cols"></div>
+            </div>
+        </section>
+
+        <!-- 回到頂部按鈕 -->
+        <button id="btn-top" class="btn top" onclick="topFunction()">
+            <span><i class="fas fa-arrow-up"></i>&ensp;TOP&ensp;</span>
+        </button>
+        <hr>
+        <footer>
+            <div class="footer-content">
+                <p>資料來源：中央氣象局</p>
+                <p>&copy; 2024 天氣小卡. All Rights Reserved.</p>
+            </div>
+        </footer>
+    </div>
+
+    <script src="./天氣小卡.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            AOS.init({
+                disable: false,
+                startEvent: 'DOMContentLoaded',
+                initClassName: 'aos-init',
+                animatedClassName: 'aos-animate',
+                useClassNames: false,
+                disableMutationObserver: false,
+                debounceDelay: 50,
+                throttleDelay: 99,
+                offset: 120,
+                delay: 0,
+                duration: 1000,
+                easing: 'ease',
+                once: false,
+                mirror: false,
+                anchorPlacement: 'top-bottom'
+            });
+        });
+    </script>
+</body>
+
+</html>
